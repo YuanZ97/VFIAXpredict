@@ -7,11 +7,13 @@ class PriceEntrySerializer(serializers.ModelSerializer):
         fields = ['open', 'high', 'low', 'close', 'adj_close']
 
 class StockEntrySerializer(serializers.ModelSerializer):
+    price = PriceEntrySerializer(many = True)
     class Meta:
         model = StockEntry
         fields = ['type', 'price']
 
 class DateEntrySerializer(serializers.ModelSerializer):
+    stocks = StockEntrySerializer(many = True)
     class Meta:
         model = DateEntry
-        fields = ['date', 'stock']
+        fields = ['date', 'stocks']
