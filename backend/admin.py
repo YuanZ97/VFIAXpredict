@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import PriceEntry, StockEntry, DateEntry
 
-# Register your models here.
+admin.site.register(PriceEntry)
+admin.site.register(StockEntry)
+admin.site.register(DateEntry)
