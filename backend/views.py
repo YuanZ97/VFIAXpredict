@@ -9,11 +9,9 @@ from backend import web_scraper
 class ValuesViewSet(viewsets.ModelViewSet):
     queryset = DateEntry.objects.all()
     serializer_class = DateEntrySerializer
+        
 
-class Update_Db(APIView):
-    def post(self):
-        data = web_scraper.repeat_scrapping_VFIAX(60)
-
-def first_temp(request):
+def frontend_temp(request):
+    data = web_scraper.repeat_scrapping_VFIAX(60)
     #values = Price.objects.all()
     return render(request, 'frontend.html', {'test'})

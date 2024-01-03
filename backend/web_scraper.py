@@ -20,7 +20,7 @@ def get_stock_data(user_agent, url, stock):
 
             if month[j] in spans[i].text:
                 # check if the data already exists in the db
-                if DateEntry.objects.create(date = spans[i].text).exists():
+                if DateEntry.objects.filter(date = rearrage_date(spans[i].text, calendar)).exists():
                     break
           
                 date_object = DateEntry.objects.create(date = rearrage_date(spans[i].text, calendar))
@@ -35,12 +35,11 @@ def repeat_scrapping_VFIAX(seconds):
 
     while True:
         new_data= get_stock_data(user_agent, url, stock)
-        print('------------')
         time.sleep(seconds)
 
 
 def rearrage_date(date, calendar):
     date = date.replace(',', '')
     date = date.split()
-    date = date[2] + '-' + date[1] + '-' + calendar[date[0]]
-    return date
+    date = date[2] + '-' + calendar[date[0]] + '-' + date[1]
+    return str(date)
